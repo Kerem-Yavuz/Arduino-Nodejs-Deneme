@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #button
+        {
+            margin-left: 35%; margin-right: 35%; margin-top: 10%;  padding: 10%; border-radius: 10vh; cursor: pointer; font-size: 100px
+        }
+        #button:active
+        {
+            background-color: rgb(226, 226, 226);
+        }
+    </style>
+    
+</head>
+<body>
+    <button id="button" onclick="sendClick()">TIKLA!</button>
+
+    <script>
+        async function sendClick()
+        {
+            try {
+                const response = await fetch('http://192.168.1.33:8001/sendClick', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+                console.log(data); // Log response
+            } catch (error) {
+                console.error('Error turning LED ON:', error);
+            }
+        }
+    </script>
+    
+</body>
+</html>
