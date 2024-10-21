@@ -3,10 +3,11 @@ import processing.net.*; // Import the net library for HTTP
 
 Server server; // Create a server object
 Serial myPort; // Create a Serial object
+int onoff = 0; // Variable to track LED state
 
 void setup() {
   size(200, 200);
-  
+
   // List available serial ports
   String[] ports = Serial.list();
   if (ports.length == 0) {
@@ -28,20 +29,12 @@ void draw() {
   Client client = server.available();
   if (client != null) {
     String request = client.readStringUntil('\n');
-    
+
     if (request != null) { // Check if the request is not null
       println(request); // Print the request for debugging
 
-      // Send commands to Arduino based on the request
-      if (request.equals("LED_ON")) {
-        myPort.write("LED_ON\n");
-        client.write("LED is ON\n");
-      } else if (request.equals("LED_OFF")) {
-        myPort.write("LED_OFF\n");
-        client.write("LED is OFF\n");
-      }
+        myPort.write("LED_OFF\n"); // Send command to turn LED off
+        
     }
-    
-    client.stop(); // Close the client connection
   }
 }

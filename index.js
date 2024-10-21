@@ -13,15 +13,15 @@ app.get("/", (req,res) => {
 
 app.post('/sendClick', (req, res) => {
     console.log("clicked");
-    let asd = turnLedOn();
-    res.json({ status: 'success', message: 'LED turned ON' , data: asd});
+    turnLedOn();
+    res.json({ status: 'success', message: 'LED turned ON'});
 });
 
 // Function to turn LED ON
 async function turnLedOn() {
   try {
-    const response = await axios.get('http://192.168.1.33:3000/LED_ON');
-    return response;
+    await axios.get('https://localhost:3000/LED_ON');
+    
   } catch (error) {
     console.error('Error turning LED on:', error);
   }

@@ -23,15 +23,14 @@
         async function sendClick()
         {
             try {
-                const response = await fetch('http://192.168.1.33:8001/sendClick', {
+                await fetch('http://localhost:8001/sendClick', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 });
 
-                const data = await response.json();
-                console.log(data); // Log response
+
             } catch (error) {
                 console.error('Error turning LED ON:', error);
             }
